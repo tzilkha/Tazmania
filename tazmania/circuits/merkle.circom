@@ -1,5 +1,4 @@
 include "../node_modules/circomlib/circuits/mimcsponge.circom";
-include "../node_modules/circomlib/circuits/poseidon.circom";
 
 // Hash left node and right node to get parent hash in merkle
 // uses the Mimc hash on left,right nodes
@@ -16,11 +15,12 @@ template HashLeftRight() {
     component hasher = MiMCSponge(2, 220, 1);
 
     // signals in hasher
-    hasher.inputs[0] <== left;
-    hasher.inputs[1] <== right;
+    hasher.ins[0] <== left;
+    hasher.ins[1] <== right;
+    hasher.k <== 0;
 
     // get the output
-    hash <== hasher.out;
+    hash <== hasher.outs[0];
 }
 
 // if s == 0 returns [in[0], in[1]]
@@ -80,12 +80,8 @@ template MerkleTreeCheck(levels) {
 		hashers[i] = HashLeftRight();
 		hashers[i].left <== selectors[i].outs[0];
 		hashers[i].right <== selectors[i].outs[1];
-		log("left", selectors[i].outs[0]);
-		log("right", selectors[i].outs[1]);
-		log("hashed", hashers[i].hash);
 	}
 
 	// At the end the last hashed value should be the input root to confirm the proof
-	log("root", root);
 	root === hashers[levels - 1].hash;
 }
