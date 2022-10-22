@@ -1,7 +1,7 @@
 [package]
-name = "hello_near"
+name = "tazmania"
 version = "1.0.0"
-authors = ["Near Inc <hello@near.org>"]
+authors = ["ibelazy"]
 edition = "2021"
 
 [lib]
@@ -10,6 +10,8 @@ crate-type = ["cdylib"]
 [dependencies]
 near-sdk = "4.0.0"
 uint = { version = "0.9.3", default-features = false }
+ff = {package="ff_ce" , version="0.11", features = ["derive"]}
+mimc-sponge-rs = { git = "https://github.com/tzilkha/mimc-sponge-rs" }
 
 [profile.release]
 codegen-units = 1
