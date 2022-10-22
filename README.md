@@ -4,9 +4,9 @@ This is an example tumbler using zk-snark on the near protocol. This project was
 
 ## Status
 
-- [] Circuits
-	- [] withdraw check
-	- [] Merkle check
+- [x] Circuits
+	- [x] withdraw check
+	- [x] Merkle check
 	- [] Set-up circuit
 - [] Contracts
 	- [] Merkle logic
