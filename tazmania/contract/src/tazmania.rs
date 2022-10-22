@@ -1,7 +1,7 @@
-use crate::merke::MerkleTree;
+use crate::merkle::MerkleTree;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::collections::LookupMap;
-use near_sdk::{log, near_bindgen};
+use near_sdk::{env, log, near_bindgen};
 
 // Define the default message
 const DEFAULT_MESSAGE: &str = "Hello";
@@ -80,12 +80,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn bad_init() {
-        let contract = Contract::new(33_u8, 10_u32);
-    }
-
-    #[test]
-    fn good_init() {
+    fn init() {
         let contract = Contract::new(25_u8, 10_u32);
     }
 
