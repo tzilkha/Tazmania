@@ -5,6 +5,8 @@ import './assets/global.css';
 
 import { EducationalText, SignInPrompt, SignOutButton } from './ui-components';
 
+import {t} from './test';
+
 
 export default function App({ isSignedIn, helloNEAR, wallet }) {
   const [valueFromBlockchain, setValueFromBlockchain] = React.useState();
@@ -26,6 +28,8 @@ export default function App({ isSignedIn, helloNEAR, wallet }) {
     // Sign-in flow will reload the page later
     return <SignInPrompt greeting={valueFromBlockchain} onClick={() => wallet.signIn()}/>;
   }
+
+  t();
 
   function changeGreeting(e) {
     e.preventDefault();
