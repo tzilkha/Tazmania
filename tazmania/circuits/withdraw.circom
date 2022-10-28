@@ -71,5 +71,4 @@ template withdraw(levels) {
 
 }
 
-component main = withdraw(5);
-
+component main = withdraw(25);

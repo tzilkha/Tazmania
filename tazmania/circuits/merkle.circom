@@ -70,6 +70,7 @@ template MerkleTreeCheck(levels) {
 		// Create a selector
 		selectors[i] = DualMux();
 
+
 		// If were at the bottom the value is actually the leaf value rather than
 		// previous levels hash. Feed values in the DualMux as well as modded index
 		selectors[i].in[0] <== i == 0 ? leaf : hashers[i - 1].hash;
@@ -84,4 +85,5 @@ template MerkleTreeCheck(levels) {
 
 	// At the end the last hashed value should be the input root to confirm the proof
 	root === hashers[levels - 1].hash;
+
 }
