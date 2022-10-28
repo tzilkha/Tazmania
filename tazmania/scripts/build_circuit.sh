@@ -13,7 +13,7 @@
 
 # constants
 TARGET_CIRCUIT=withdraw.circom
-PTAU_FILE=powersOfTau28_hez_final_15.ptau
+PTAU_FILE=powersOfTau28_hez_final_16.ptau
 ENTROPY_FOR_ZKEY=mnbvc
 
 # build directory ../build/circuits
@@ -24,7 +24,9 @@ cd ../build/circuits
 # generate circuit.r1cs & circuit.sym & circuit.wasm
 
 echo 'Generating circuit.r1cs & circuit.sym & circuit.wasm'
+
 circom ../../circuits/$TARGET_CIRCUIT --r1cs circuit.r1cs --wasm circuit.wasm --sym circuit.sym
+
 
 # # download $PTAU_FILE
 if [ -f ./$PTAU_FILE ]; then
