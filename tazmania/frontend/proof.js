@@ -24,12 +24,13 @@ export class Deposit{
 			'nullifier': '0x' + toBigIntLE(this.nullifier).toString(16)
 		}
 	}
-	get_commitment() { return '0x' + this.commitment.toString(16); }
-	get_nullifier_hash() { return '0x' + this.nullifierHash.toString(16); }
+	get_commitment() { return this.commitment; }
+	get_nullifier_hash() { return this.nullifierHash; }
 	get_secret() { return '0x' + toBigIntLE(this.secret).toString(16); }
 	get_nullifier() { return '0x' + toBigIntLE(this.nullifier).toString(16); }
 }
 
+// Wrapper around deposit function to pass pedersen since cannot async in constructor
 export async function create_deposit(old_deposit = null) {
 	var ph = new PedersenHasher();
 	await ph.build();
@@ -37,3 +38,5 @@ export async function create_deposit(old_deposit = null) {
 	var dep = new Deposit(ph, old_deposit);
 	return dep;
 }
+
+

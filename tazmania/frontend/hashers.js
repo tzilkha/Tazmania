@@ -31,8 +31,9 @@ export class PedersenHasher {
 		this.hasher = await buildPedersenHash();
 	}
 
-
-  	hash(input) {
-  		return buff2hex(this.hasher.hash(input))
+  	hash(data) {
+  		var point = this.hasher.hash(data);
+  		var unpacked = this.hasher.babyJub.unpackPoint(point)[0];
+  		return '0x' + this.hasher.babyJub.F.toString(unpacked, 16);
   	}
 }
