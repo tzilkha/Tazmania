@@ -36,10 +36,10 @@ template withdraw(levels) {
     //signal input relayer;  // not taking part in any computations
     //signal input fee;      // not taking part in any computations
     //signal input refund;   // not taking part in any computations
-    signal input nullifier;
-    signal input secret;
-    signal input pathElements[levels];
-    signal input pathIndices[levels];
+    signal private input nullifier;
+    signal private input secret;
+    signal private input pathElements[levels];
+    signal private input pathIndices[levels];
 
     component hasher = commitmentCheck();
     hasher.nullifier <== nullifier;
