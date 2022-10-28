@@ -8,13 +8,14 @@
     "build": "npm run build:contract && npm run build:web",
     "build:web": "cd frontend && npm run build",
     "build:contract": "cd contract && ./build.sh",
+    "build:circuit": "cd scripts && ./build_circuit.sh",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "cd contract && cargo test",
     "test:integration": "cd integration-tests && cargo run --example integration-tests \"../contract/target/wasm32-unknown-unknown/release/tazmania.wasm\"",
     "postinstall": "cd frontend && npm install && cd .. && echo rs tests && echo rs contract"
   },
   "devDependencies": {
+    "circomlib": "^0.5.2",
     "near-cli": "^3.3.0"
-  },
-  "dependencies": {}
+  }
 }
