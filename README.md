@@ -10,9 +10,12 @@ This is an example tumbler using zk-snark on the near protocol. This project was
 	- [] Set-up circuit
 - [x] Contracts
 	- [x] Merkle logic
-	- [] Withdraw logic
+	- [x] Withdraw logic
 	- [x] Deposit logic
+	- [x] Verifier working
 - [] Relayer
 	- [] Relayer server script
 - [] Frontend
+	- [x] Merkle proof
+	- [] UI
 - [] Tests
