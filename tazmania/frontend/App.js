@@ -4,66 +4,108 @@ import React from 'react';
 import './assets/global.css';
 
 import { EducationalText, SignInPrompt, SignOutButton } from './ui-components';
+import { create_deposit } from './proof';
 
 import {t} from './test';
 
 
-export default function App({ isSignedIn, helloNEAR, wallet }) {
-  const [valueFromBlockchain, setValueFromBlockchain] = React.useState();
+export default function App({ isSignedIn, tazmania, wallet }) {
 
-  const [uiPleaseWait, setUiPleaseWait] = React.useState(true);
+  // Local storage for nullifier
+  const [valueNullifierStorage, setValueNullifierStorage] = React.useState(() => {
+    const initialValue = localStorage.getItem("nullifier");
+    return initialValue || "";
+  });
 
-  // Get blockchian state once on component load
-  React.useEffect(() => {
-    helloNEAR.getGreeting()
-      .then(setValueFromBlockchain)
-      .catch(alert)
-      .finally(() => {
-        setUiPleaseWait(false);
-      });
-  }, []);
+  // Local storage for secret
+  const [valueSecretStorage, setValueSecretStorage] = React.useState(() => {
+    const initialValue = localStorage.getItem("secret");
+    return "";
+  });
+
+  // Field for nulifier which reads from local storage and deletes
+  const [valueNullifier, setValueNullifier] = React.useState(() => {
+    const initialValue = localStorage.getItem("nullifier");
+    localStorage.removeItem("nullifier");
+    return initialValue || "";
+  });
+
+  // Field for secret which reads from local storage and deletes
+  const [valueSecret, setValueSecret] = React.useState(() => {
+    const initialValue = localStorage.getItem("secret");
+    localStorage.removeItem("secret");
+    return initialValue || "";
+  });
 
   /// If user not signed-in with wallet - show prompt
   if (!isSignedIn) {
     // Sign-in flow will reload the page later
-    return <SignInPrompt greeting={valueFromBlockchain} onClick={() => wallet.signIn()}/>;
+    return <SignInPrompt onClick={() => wallet.signIn()}/>;
   }
 
-  t();
+  async function deposit(e) {
+    var deposit = await create_deposit();
+    var secret =  deposit.get_secret();
+    var nullifier = deposit.get_nullifier();
+    var commitment = deposit.get_commitment();
+    
+    var res = tazmania.deposit({"commitment": commitment}, 
+      '1000000000000000000000000');
 
-  function changeGreeting(e) {
-    e.preventDefault();
-    setUiPleaseWait(true);
-    const { greetingInput } = e.target.elements;
-    helloNEAR.setGreeting(greetingInput.value)
-      .then(async () => {return helloNEAR.getGreeting();})
-      .then(setValueFromBlockchain)
-      .finally(() => {
-        setUiPleaseWait(false);
-      });
+    console.log(res);
+
+    // To persist values, we store them in local storage and then
+    // clear them after we load them so no trace is saved locally
+    localStorage.setItem("secret", secret);
+    localStorage.setItem("nullifier", nullifier);
+    setValueSecret(valueSecretStorage);
+    setValueNullifier(valueNullifierStorage);
+
+    return res
   }
+
+
+
+  // TODO
+  async function get_root() {
+    console.log( tazmania.root());
+  }
+
+  // function get_root() {
+  //   e.preventDefault();
+  //   setUiPleaseWait(true);
+  //   helloNEAR.setGreeting(greetingInput.value)
+  //     .then(async () => {return helloNEAR.get_root();})
+  //     .then(setValueFromBlockchain)
+  //     .finally(() => {
+  //       setUiPleaseWait(false);
+  //     });
+  // }
 
   return (
     <>
       <SignOutButton accountId={wallet.accountId} onClick={() => wallet.signOut()}/>
-      <main className={uiPleaseWait ? 'please-wait' : ''}>
+      <main >
         <h1>
-          The contract says: <span className="greeting">{valueFromBlockchain}</span>
         </h1>
-        <form onSubmit={changeGreeting} className="change">
-          <label>Change greeting:</label>
-          <div>
-            <input
-              autoComplete="off"
-              defaultValue={valueFromBlockchain}
-              id="greetingInput"
-            />
-            <button>
-              <span>Save</span>
+          <div className="deposit">
+            <button onClick={deposit}>
+              <span>Deposit</span>
               <div className="loader"></div>
             </button>
           </div>
-        </form>
+          <div>
+            <div>
+              Secret:
+              <textarea className="sensitive" readOnly={true} value={valueSecret}>
+              </textarea>
+            </div>
+            <div>
+              Nullifier:
+              <textarea className="sensitive" readOnly={true} value={valueNullifier}>
+              </textarea>
+            </div>
+          </div>
         <EducationalText/>
       </main>
     </>
