@@ -96,6 +96,7 @@ impl MerkleTree {
     }
 }
 
+// TODO: Make this instantiated through tazmania init
 const HISTORY_SIZE: u8 = 100;
 
 const ZEROS: [&str; 33] = [
