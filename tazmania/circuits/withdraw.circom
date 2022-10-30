@@ -61,6 +61,7 @@ template withdraw(levels) {
 
     // Add hidden signals to make sure that tampering with recipient or fee will invalidate the snark proof
     // Most likely it is not required, but it's better to stay on the safe side and it only takes 2 constraints
+    
     // Squares are used to prevent optimizer from removing those constraints
     //signal recipientSquare;
     //signal feeSquare;
