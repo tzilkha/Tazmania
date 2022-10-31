@@ -50,7 +50,7 @@ export default function App({ isSignedIn, tazmania, wallet }) {
     var commitment = deposit.get_commitment();
     
     var res = tazmania.deposit({"commitment": commitment}, 
-      '1000000000000000000000000');
+      '10000000000000000000000000');
 
     console.log(res);
 
