@@ -94,6 +94,10 @@ impl MerkleTree {
             }
         }
     }
+
+    pub fn get_leaves(&self) -> Vec<String> {
+        return self.leaves.clone();
+    }
 }
 
 // TODO: Make this instantiated through tazmania init

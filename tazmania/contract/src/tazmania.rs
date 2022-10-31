@@ -128,6 +128,21 @@ impl Contract {
     pub fn get_root(&self) -> String {
         return self.merkle_tree.get_root();
     }
+
+    // Front facing get_leaves for relayers maintaining local merkle
+    pub fn get_leaves(&self) -> Vec<String> {
+        return self.merkle_tree.get_leaves();
+    }
+
+    // Front facing get_leaf for relayers maintaining local merkle
+    pub fn get_leaf(&self, index: u32) -> String {
+        return self.merkle_tree.get_leaves()[index as usize].clone();
+    }
+
+    // Front facing to get number of leaves for relayers
+    pub fn n_leaves(&self) -> usize {
+        return self.merkle_tree.get_leaves().len();
+    }
 }
 
 /*
