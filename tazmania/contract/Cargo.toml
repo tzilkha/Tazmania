@@ -12,6 +12,8 @@ near-sdk = "4.0.0"
 uint = { version = "0.9.3", default-features = false }
 ff = {package="ff_ce" , version="0.11", features = ["derive"]}
 mimc-sponge-rs = { git = "https://github.com/tzilkha/mimc-sponge-rs" }
+electron-rs = { git = "https://github.com/Electron-Labs/electron-rs" }
+
 
 [profile.release]
 codegen-units = 1
