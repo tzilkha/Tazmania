@@ -77,6 +77,8 @@ impl MerkleTree {
             current_index /= 2;
         }
 
+        self.leaves.push(leaf.to_string());
+
         self.root_index = (self.root_index + 1) % HISTORY_SIZE;
         self.root_history[self.root_index as usize] = current_hash.to_string();
     }
@@ -95,8 +97,8 @@ impl MerkleTree {
         }
     }
 
-    pub fn get_leaves(&self) -> Vec<String> {
-        return self.leaves.clone();
+    pub fn get_leaves(&self) -> &Vec<String> {
+        return &self.leaves;
     }
 }
 
