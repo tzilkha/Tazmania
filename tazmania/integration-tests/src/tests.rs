@@ -72,6 +72,15 @@ async fn main() -> anyhow::Result<()> {
     println!("Alice balance - {}", alice.view_account().await?.balance);
     println!("Bob balance - {}", bob.view_account().await?.balance);
 
+
+    println!("Check n_leaves");
+    let (res, gas) = n_leaves(&relayer, contract.id()).await;
+    println!("Relayer initiated n_leaves: success:{} - gas:{}", res, gas);
+
+    println!("Check get_leaves");
+    let (res, gas) = get_leaves(&relayer, contract.id()).await;
+    println!("Relayer initiated n_leaves: success:{} - gas:{}", res, gas);
+
     Ok(())
 }
 
@@ -86,6 +95,44 @@ async fn create_sub(account: &Account, name: &str) -> Account {
         .await
         .unwrap()
         .result
+}
+
+async fn get_leaves(account: &Account,
+    contract_id: &AccountId) -> (bool, u64)
+{
+    println!("get_leaves...");
+
+    let output = account
+        .call(contract_id, "get_leaves")
+        .args_json({})
+        .max_gas()
+        .transact()
+        .await
+        .unwrap();
+
+    println!("ALL - {:?}", output);
+    println!("Logs - {:?}", output.logs());
+
+    (output.is_success(), output.total_gas_burnt)
+}
+
+async fn n_leaves(account: &Account,
+    contract_id: &AccountId) -> (bool, u64)
+{
+    println!("n_leaves...");
+
+    let output = account
+        .call(contract_id, "n_leaves")
+        .args_json({})
+        .max_gas()
+        .transact()
+        .await
+        .unwrap();
+
+    println!("ALL - {:?}", output);
+    println!("Logs - {:?}", output.logs());
+
+    (output.is_success(), output.total_gas_burnt)
 }
 
 async fn deposit(account: &Account, 
