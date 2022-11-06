@@ -2,20 +2,14 @@
 
 This is an example tumbler using zk-snark on the near protocol. This project was created for educational purposes to practice NEAR development and zk-snarks.
 
-## Status
+## TODO
 
-- [x] Circuits
-	- [x] withdraw check
-	- [x] Merkle check
-	- [] Set-up circuit
-- [x] Contracts
-	- [x] Merkle logic
-	- [x] Withdraw logic
-	- [x] Deposit logic
-	- [x] Verifier working
-- [] Relayer
-	- [] Relayer server script
-- [] Frontend
-	- [x] Merkle proof
-	- [] UI
-- [] Tests
+- Account encoding for verification on smart contract and zk.
+- Incorporate fee check into proof.
+- Add sender id to frontend.
+- Display relayer fee before approving withdraw.
+- Error checking in frontend and relayer.
+
+## How to Run
+
+Go 
