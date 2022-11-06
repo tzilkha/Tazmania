@@ -1,0 +1,13 @@
+{
+	"fee": "",
+	"port": , 
+	"relayer_id": "",
+	"relayer_key": "",
+	"tazmania_id": "",
+
+	"explorer_host": "testnet.db.explorer.indexer.near.dev",
+	"explorer_database": "testnet_explorer",
+	"explorer_user": "public_readonly",
+	"explorer_password": "nearprotocol"
+}
+
