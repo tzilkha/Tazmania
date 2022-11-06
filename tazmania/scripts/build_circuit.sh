@@ -47,3 +47,10 @@ echo $ENTROPY_FOR_ZKEY | snarkjs zkey contribute circuit_0000.zkey circuit_final
 # generate verification_key.json
 echo "Generating verification_key.json"
 snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
+
+# copy circuit_final, verification key and wasm to frontend and relayer
+mkdir ../../frontend/assets/zk
+cp circuit_final.zkey ../../frontend/assets/zk/circuit_final.zkey
+cp circuit.wasm ../../frontend/assets/zk/circuit.wasm
+cp verification_key.json ../../frontend/assets/zk/verification_key.json
+cp verification_key.json ../../relayer/verification_key.json
