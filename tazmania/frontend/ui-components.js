@@ -29,13 +29,3 @@ export function SignOutButton({accountId, onClick}) {
     </button>
   );
 }
-
-export function EducationalText() {
-  return (
-    <>
-      <p>
-        Once you deposit make sure to save the secret and nullifier!
-      </p>
-    </>
-  );
-}

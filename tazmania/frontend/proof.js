@@ -39,4 +39,3 @@ export async function create_deposit(old_deposit = null) {
 	return dep;
 }
 
-

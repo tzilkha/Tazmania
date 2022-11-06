@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "circomlib": "^0.5.2",
-    "near-cli": "^3.3.0"
+    "near-cli": "^3.3.0",
+    "parcel-plugin-static-files-copy": "^2.6.0"
   }
 }

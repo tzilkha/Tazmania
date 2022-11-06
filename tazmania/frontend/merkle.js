@@ -1,5 +1,4 @@
 const ZERO = "0x74617a6d616e6961"; // Encoded "tazmania" string in hex
-const LEVELS = 32;
 
 export class MerkleTree {
 
