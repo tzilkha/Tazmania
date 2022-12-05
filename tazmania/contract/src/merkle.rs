@@ -84,10 +84,10 @@ impl MerkleTree {
     }
 
     // Check if given string is a valid root from history
-    pub fn is_root(&self, r: String) -> bool {
+    pub fn is_root(&self, r: &str) -> bool {
         let mut i = self.root_index;
         loop {
-            if self.root_history[i as usize] == r {
+            if &self.root_history[i as usize] == r {
                 return true;
             }
             i = (i + 1) % HISTORY_SIZE;
