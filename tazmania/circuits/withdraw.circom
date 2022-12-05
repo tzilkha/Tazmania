@@ -37,10 +37,9 @@ template withdraw(levels) {
     signal private input pathElements[levels];
     signal private input pathIndices[levels];
 
-    //signal input recipient; // not taking part in any computations
-    //signal input relayer;  // not taking part in any computations
-    //signal input fee;      // not taking part in any computations
-    //signal input refund;   // not taking part in any computations
+    signal input recipient; // not taking part in any computations
+    signal input relayer;  // not taking part in any computations
+    signal input fee;      // not taking part in any computations
 
     // Produce commitment
     component hasher = commitmentCheck();
@@ -63,14 +62,12 @@ template withdraw(levels) {
     // Most likely it is not required, but it's better to stay on the safe side and it only takes 2 constraints
     
     // Squares are used to prevent optimizer from removing those constraints
-    //signal recipientSquare;
-    //signal feeSquare;
-    //signal relayerSquare;
-    //signal refundSquare;
-    //recipientSquare <== recipient * recipient;
-    //feeSquare <== fee * fee;
-    //relayerSquare <== relayer * relayer;
-    //refundSquare <== refund * refund;
+    signal recipientSquare;
+    signal feeSquare;
+    signal relayerSquare;
+    recipientSquare <== recipient * recipient;
+    feeSquare <== fee * fee;
+    relayerSquare <== relayer * relayer;
 
 }
 
